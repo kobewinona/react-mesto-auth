@@ -8,8 +8,8 @@ function Card({card, onCardClick, onCardLikeClick, onCardDeleteClick}) {
   
   const [isPlaceLoaded, setIsPlaceLoaded] = useState(false);
   
-  const isOwner = currentUser._id === card.owner._id;
-  const isLiked = card.likes.some(like => like._id === currentUser._id);
+  const isOwner = currentUser['_id'] === card['owner']['_id'];
+  const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
   
   function handlePlaceLoad() {
     setIsPlaceLoaded(true);
@@ -38,7 +38,7 @@ function Card({card, onCardClick, onCardLikeClick, onCardDeleteClick}) {
           <div className="places__like-container">
             <button className={`places__like-button ${isLiked && 'places__like-button_active'}`}
                     type="button" aria-label="Нравится." onClick={onCardLikeClick}/>
-            <p className="places__like-count">{card.likes.length}</p>
+            <p className="places__like-count">{card['likes'].length}</p>
           </div>
         </figcaption>
       </figure>
