@@ -1,12 +1,14 @@
+import {useCallback} from 'react';
+
 import PopupWithForm from './PopupWithForm';
 
 
-function DeletePlacePopup(props) {
-  function handleSubmit(event) {
+const DeletePlacePopup = props => {
+  const handleSubmit = useCallback(event => {
     event.preventDefault();
     
     props.onDeletePlace(props.cardToDelete)
-  }
+  }, [props]);
   
   return(
     <PopupWithForm

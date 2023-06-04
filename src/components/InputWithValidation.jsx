@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import {forwardRef, useState, useEffect} from 'react';
 
 
-const InputWithValidation = React.forwardRef(({name, onUpdate, isShown, ...props}, ref) => {
+const InputWithValidation = forwardRef(({name, onUpdate, isShown, ...props}, ref) => {
   const [inputValue, setInputValue] = useState('');
   const [isInputValid, setIsInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -12,7 +12,7 @@ const InputWithValidation = React.forwardRef(({name, onUpdate, isShown, ...props
     setErrorMessage('');
   }, [props.defaultValue, isShown]);
   
-  function handleInputsChange(event) {
+  const handleInputsChange = event => {
     setInputValue(event.target.value);
     setIsInputValid(event.target.validity.valid);
     setErrorMessage(event.target.validationMessage);

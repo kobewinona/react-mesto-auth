@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useContext, useCallback} from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -6,24 +6,23 @@ import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-function EditProfilePopup(props) {
+const EditProfilePopup = props => {
   const currentUser = useContext(CurrentUserContext);
   
   const [inputValues, setInputValues] = useState({});
   
-  
-  function handleValuesUpdate(name, value) {
+  const handleValuesUpdate = (name, value) => {
     setInputValues((prevValues) => ({
       ...prevValues, [name]: value
     }));
   }
   
-  function handleSubmit() {
+  const handleSubmit = useCallback(() => {
     props.onUpdateUser({
       name: inputValues.userName,
       about: inputValues.userAbout
     });
-  }
+  }, [props, inputValues.userName, inputValues.userAbout]);
   
   useEffect(() => {
     setInputValues({

@@ -5,12 +5,12 @@ import {CurrentUserContext} from '../contexts/CurrentUserContext';
 import Card from './Card';
 
 
-function Main(props) {
+const Main = props => {
   const currentUser = useContext(CurrentUserContext);
   
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(false);
   
-  function handleAvatarLoad() {
+  const handleAvatarLoad = () => {
     setIsAvatarLoaded(true);
   }
   

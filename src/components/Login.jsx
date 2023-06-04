@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Login(props) {
+const Login = props => {
   return (
     <div>Login</div>
   );

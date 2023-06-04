@@ -1,13 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import {memo, useState, useEffect} from 'react';
 
 import Spinner from './Spinner';
 
 
-const FormWithValidation = React.memo((props) => {
+const FormWithValidation = memo(props => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [inputsValidity, setInputsValidity] = useState({});
   
-  function handleChange(event) {
+  const handleChange = event => {
     const inputs = Array.from(event.currentTarget.elements);
     
     const currentInputsValidity = inputs.reduce((validity, input) => {
@@ -18,7 +18,7 @@ const FormWithValidation = React.memo((props) => {
     setInputsValidity(currentInputsValidity);
   }
   
-  function validateForm() {
+  const validateForm = () => {
     const inputValues = Object.values(inputsValidity);
 
     if (inputValues.length === 0) {
@@ -29,7 +29,7 @@ const FormWithValidation = React.memo((props) => {
     setIsFormValid(inputValues.every((i) => i === true));
   }
   
-  function handleSubmit(event) {
+  const handleSubmit = event => {
     event.preventDefault();
     
     if (event.target.checkValidity()) {

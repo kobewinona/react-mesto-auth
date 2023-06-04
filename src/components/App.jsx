@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Routes, Route} from 'react-router-dom';
 
 import api from '../utils/Api';
@@ -18,7 +18,7 @@ import Register from './Register';
 import Login from './Login';
 
 
-function App() {
+const App = () => {
   const [currentUser, setCurrentUser] = useState({});
   
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -51,36 +51,36 @@ function App() {
   
   // handle open popup
   
-  function handleEditAvatarClick() {
+  const handleEditAvatarClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
       editAvatarPopup: true
     });
-  }
+  }, [isPopupOpen])
   
-  function handleEditProfileClick() {
+  const handleEditProfileClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
       editProfilePopup: true
     });
-  }
+  }, [isPopupOpen])
   
-  function handleAddPlaceClick() {
+  const handleAddPlaceClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
       addPlacePopup: true
     });
-  }
+  }, [isPopupOpen]);
   
-  function handleDeletePlaceClick(card) {
+  const handleDeletePlaceClick = useCallback(card => {
     setCardToDelete(card);
     
     setIsPopupOpen({...isPopupOpen,
       deletePlacePopup: true
     });
-  }
+  }, [isPopupOpen]);
   
   
   // handle close popup
   
-  function closeAllPopups() {
+  const closeAllPopups = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
       editAvatarPopup: false,
       editProfilePopup: false,
@@ -88,10 +88,9 @@ function App() {
       deletePlacePopup: false,
       cardPreviewPopup: false
     });
-    
     const cleanUp = () => setSelectedCard({});
     setTimeout(cleanUp, 200);
-  }
+  }, [isPopupOpen]);
   
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -112,26 +111,26 @@ function App() {
   
   // handle cards
   
-  function handleCardClick(card) {
+  const handleCardClick = useCallback(card => {
     setIsPopupOpen({...isPopupOpen,
       cardPreviewPopup: true
     });
     
     setSelectedCard(card);
-  }
+  }, [isPopupOpen]);
   
-  function handleCardLikeClick(card) {
+  const handleCardLikeClick = useCallback(card => {
     const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
   
     api.changeLikeCardStatus(card['_id'], isLiked)
       .then(newCard => setCards(cards.map(c => c['_id'] === card['_id'] ? newCard : c)))
       .catch(err => console.log(err));
-  }
+  }, [currentUser]);
   
   
   // handle forms
   
-  function handleUpdateAvatar(avatar) {
+  const handleUpdateAvatar = useCallback(avatar => {
     setIsLoading(true);
     
     api.patchUserAvatar(avatar)
@@ -139,9 +138,9 @@ function App() {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }
+  }, []);
   
-  function handleUpdateUser(newUserInfo) {
+  const handleUpdateUser = useCallback(newUserInfo => {
     setIsLoading(true);
     
     api.patchUserInfo(newUserInfo)
@@ -149,9 +148,9 @@ function App() {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }
+  }, []);
   
-  function handleAddPlace(newCard) {
+  const handleAddPlace = useCallback(newCard => {
     setIsLoading(true);
     
     api.postCard(newCard)
@@ -159,9 +158,9 @@ function App() {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }
+  }, [cards]);
   
-  function handleDeletePlace(card) {
+  const handleDeletePlace = useCallback(card => {
     setIsLoading(true);
     
     api.deleteCard(card['_id'])
@@ -169,7 +168,7 @@ function App() {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }
+  }, [cards]);
   
   return (
     <CurrentUserContext.Provider value={currentUser}>

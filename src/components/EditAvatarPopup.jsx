@@ -1,23 +1,23 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
 
 import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-function EditAvatarPopup(props) {
+const EditAvatarPopup = props => {
   const avatarInputRef = useRef();
   
   const [inputValue, setInputValue] = useState({});
   
-  function handleValueUpdate(name, value) {
+  const handleValueUpdate = (name, value) => {
     setInputValue({[name]: value});
   }
   
-  function handleSubmit() {
-    props.onUpdateAvatar({avatar: inputValue.userAvatar});
+  const handleSubmit = useCallback(() => {
+    props.onUpdateAvatar({avatar: inputValue['userAvatar']});
   
     avatarInputRef.current.value = '';
-  }
+  });
   
   return (
     <PopupWithForm

@@ -4,7 +4,7 @@ import {Navigate} from 'react-router-dom';
 import {AuthContext} from '../contexts/AuthContext';
 
 
-function ProtectedRoute({element: Component, ...props}) {
+const ProtectedRoute = ({element: Component, ...props}) => {
   const isLoggedIn = useContext(AuthContext);
   
   return (

@@ -1,24 +1,31 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 
 import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-function AddPlacePopup(props) {
+const AddPlacePopup = props => {
   const [inputValues, setInputValues] = useState({placeName: '', placeLink: ''});
   
-  function handleValuesUpdate(name, value) {
+  const handleValuesUpdate = (name, value) => {
     setInputValues((prevValues) => ({
       ...prevValues, [name]: value
     }));
   }
   
-  function handleSubmit() {
+  // const handleSubmit = useCallback(() => {
+  //   props.onAddPlace({
+  //     name: inputValues.placeName,
+  //     link: inputValues.placeLink
+  //   })
+  // }, [props, inputValues.placeName, inputValues.placeLink]);
+  
+  const handleSubmit = () => {
     props.onAddPlace({
       name: inputValues.placeName,
       link: inputValues.placeLink
     })
-  }
+  };
   
   return (
     <PopupWithForm
