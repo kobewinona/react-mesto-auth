@@ -1,9 +1,9 @@
-import {useCallback} from 'react';
+import {memo, useCallback} from 'react';
 
 import PopupWithForm from './PopupWithForm';
 
 
-const DeletePlacePopup = props => {
+const DeletePlacePopup = memo(props => {
   const handleSubmit = useCallback(event => {
     event.preventDefault();
     
@@ -19,6 +19,6 @@ const DeletePlacePopup = props => {
       {...props}
     />
   );
-}
+});
 
 export default DeletePlacePopup;

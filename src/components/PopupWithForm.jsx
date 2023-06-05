@@ -46,6 +46,6 @@ const PopupWithForm = memo(props => {
       </div>
     </section>
   );
-})
+});
 
 export default PopupWithForm;

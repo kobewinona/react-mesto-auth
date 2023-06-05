@@ -16,7 +16,7 @@ const FormWithValidation = memo(props => {
     }, {});
     
     setInputsValidity(currentInputsValidity);
-  }
+  };
   
   const validateForm = () => {
     const inputValues = Object.values(inputsValidity);
@@ -68,6 +68,6 @@ const FormWithValidation = memo(props => {
         >{props.submitText || 'Сохранить'}</button>}
     </form>
   )
-})
+});
 
 export default FormWithValidation;

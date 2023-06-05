@@ -33,6 +33,6 @@ const InputWithValidation = forwardRef(({name, onUpdate, isShown, ...props}, ref
       <span className="form__input-error">{!isInputValid && errorMessage}</span>
     </>
   );
-})
+});
 
 export default InputWithValidation;

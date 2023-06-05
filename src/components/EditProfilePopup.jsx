@@ -1,4 +1,4 @@
-import {useState, useEffect, useContext, useCallback} from 'react';
+import {memo, useCallback, useState, useEffect, useContext} from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -6,23 +6,23 @@ import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-const EditProfilePopup = props => {
+const EditProfilePopup = memo(props => {
   const currentUser = useContext(CurrentUserContext);
   
   const [inputValues, setInputValues] = useState({});
   
-  const handleValuesUpdate = (name, value) => {
+  const handleValuesUpdate = useCallback((name, value) => {
     setInputValues((prevValues) => ({
       ...prevValues, [name]: value
     }));
-  }
+  }, []);
   
   const handleSubmit = useCallback(() => {
     props.onUpdateUser({
-      name: inputValues.userName,
-      about: inputValues.userAbout
+      name: inputValues['userName'],
+      about: inputValues['userAbout']
     });
-  }, [props, inputValues.userName, inputValues.userAbout]);
+  }, [props, inputValues]);
   
   useEffect(() => {
     setInputValues({
@@ -66,6 +66,6 @@ const EditProfilePopup = props => {
       />
     </PopupWithForm>
   );
-}
+});
 
 export default EditProfilePopup;

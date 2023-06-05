@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import {useCallback, useState, useEffect} from 'react';
 import {Routes, Route} from 'react-router-dom';
 
 import api from '../utils/Api';
@@ -29,7 +29,7 @@ const App = () => {
     addPlacePopup: false,
     deletePlacePopup: false,
     cardPreviewPopup: false
-  })
+  });
   
   const [isLoading, setIsLoading] = useState(false);
   
@@ -46,7 +46,7 @@ const App = () => {
         setCurrentUser(userData);
         setCards(initialCards);
       }).catch(err => console.log(err));
-  }, [])
+  }, []);
   
   
   // handle open popup
@@ -55,13 +55,13 @@ const App = () => {
     setIsPopupOpen({...isPopupOpen,
       editAvatarPopup: true
     });
-  }, [isPopupOpen])
+  }, [isPopupOpen]);
   
   const handleEditProfileClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
       editProfilePopup: true
     });
-  }, [isPopupOpen])
+  }, [isPopupOpen]);
   
   const handleAddPlaceClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
@@ -97,7 +97,7 @@ const App = () => {
       if (event.key === 'Escape') {
         closeAllPopups();
       }
-    }
+    };
   
     if (Object.values(isPopupOpen).some(p => p === true)) {
       document.addEventListener('keydown', handleKeyDown);
@@ -125,12 +125,12 @@ const App = () => {
     api.changeLikeCardStatus(card['_id'], isLiked)
       .then(newCard => setCards(cards.map(c => c['_id'] === card['_id'] ? newCard : c)))
       .catch(err => console.log(err));
-  }, [currentUser]);
+  }, [cards, currentUser._id]);
   
   
   // handle forms
   
-  const handleUpdateAvatar = useCallback(avatar => {
+  const handleUpdateAvatar = avatar => {
     setIsLoading(true);
     
     api.patchUserAvatar(avatar)
@@ -138,9 +138,9 @@ const App = () => {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }, []);
+  };
   
-  const handleUpdateUser = useCallback(newUserInfo => {
+  const handleUpdateUser = newUserInfo => {
     setIsLoading(true);
     
     api.patchUserInfo(newUserInfo)
@@ -148,9 +148,9 @@ const App = () => {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }, []);
+  };
   
-  const handleAddPlace = useCallback(newCard => {
+  const handleAddPlace = newCard => {
     setIsLoading(true);
     
     api.postCard(newCard)
@@ -158,9 +158,9 @@ const App = () => {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }, [cards]);
+  };
   
-  const handleDeletePlace = useCallback(card => {
+  const handleDeletePlace = card => {
     setIsLoading(true);
     
     api.deleteCard(card['_id'])
@@ -168,7 +168,7 @@ const App = () => {
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
       .finally(() => setIsLoading(false));
-  }, [cards]);
+  };
   
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -229,6 +229,6 @@ const App = () => {
       />
     </CurrentUserContext.Provider>
   );
-}
+};
 
 export default App;

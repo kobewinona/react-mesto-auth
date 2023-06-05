@@ -28,6 +28,6 @@ const ImagePopup = ({card, isOpen, onClose}) => {
       </div>
     </section>
   );
-}
+};
 
 export default ImagePopup;

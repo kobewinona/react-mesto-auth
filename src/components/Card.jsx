@@ -44,6 +44,6 @@ const Card = ({card, onCardClick, onCardLikeClick, onCardDeleteClick}) => {
       </figure>
     </li>
   );
-}
+};
 
 export default Card;
