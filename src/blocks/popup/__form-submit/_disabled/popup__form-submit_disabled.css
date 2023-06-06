@@ -1,4 +1,4 @@
-.form__submit_disabled {
+.popup__form-submit_disabled {
   color: rgba(0, 0, 0, .2);
   
   cursor: default;
@@ -8,4 +8,8 @@
   border: 1px solid rgba(0, 0, 0, .2);
   
   transition: all .2s ease-out;
+}
+
+.popup__form-submit_disabled:hover {
+  opacity: 1;
 }

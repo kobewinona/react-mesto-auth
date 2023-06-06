@@ -31,6 +31,7 @@ const AddPlacePopup = memo(props => {
       <InputWithValidation
         isShown={props.isOpen}
         onUpdate={handleValuesUpdate}
+        formPlace="popup"
         name="placeName"
         type="text"
         placeholder="Название"
@@ -42,6 +43,7 @@ const AddPlacePopup = memo(props => {
       <InputWithValidation
         isShown={props.isOpen}
         onUpdate={handleValuesUpdate}
+        formPlace="popup"
         name="placeLink"
         type="url"
         placeholder="Ссылка на изображение"

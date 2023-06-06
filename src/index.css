@@ -14,6 +14,14 @@
 @import url('blocks/header/header.css');
 @import url('blocks/header/__logo/header__logo.css');
 
+@import url('blocks/auth/auth.css');
+@import url('blocks/auth/__title/auth__title.css');
+@import url('blocks/auth/__form/auth__form.css');
+@import url('blocks/auth/__form-input/auth__form-input.css');
+@import url('blocks/auth/__form-submit/auth__form-submit.css');
+@import url('blocks/auth/__form-submit/_disabled/auth__form-submit_disabled.css');
+@import url('blocks/auth/__login-link/auth__login-link.css');
+
 @import url('blocks/profile/profile.css');
 @import url('blocks/profile/__avatar-container/profile__avatar-container.css');
 @import url('blocks/profile/__edit-avatar-button/profile__edit-avatar-button.css');
@@ -48,20 +56,14 @@
 @import url('blocks/popup/_type/popup_base_dark.css');
 @import url('blocks/popup/__cloes-button/popup__close-button.css');
 @import url('blocks/popup/__container/popup__container.css');
+@import url('blocks/popup/__form/popup__form.css');
+@import url('blocks/popup/__form-input/popup__form-input.css');
+@import url('blocks/popup/__form-input-error/popup__form-input-error.css');
+@import url('blocks/popup/__form-submit/popup__form-submit.css');
+@import url('blocks/popup/__form-submit/_disabled/popup__form-submit_disabled.css');
 @import url('blocks/popup/__container/_type/popup__container_type_form.css');
 @import url('blocks/popup/__container/_type/popup__container_type_preview.css');
 @import url('blocks/popup/__title/popup__title.css');
 @import url('blocks/popup/__preview-element/popup__preview-element.css');
 @import url('blocks/popup/__preview-photo/popup__preview-photo.css');
 @import url('blocks/popup/__preview-cap/popup__preview-cap.css');
-
-@import url('blocks/form/form.css');
-@import url('blocks/form/_type/form_type_edit-avatar.css');
-@import url('blocks/form/_type/form_type_edit-profile.css');
-@import url('blocks/form/_type/form_type_add-place.css');
-@import url('blocks/form/_type/form_type_delete-place.css');
-@import url('blocks/form/__input/form__input.css');
-@import url('blocks/form/__input/_error/form__input_error.css');
-@import url('blocks/form/__input-error/form__input-error.css');
-@import url('blocks/form/__submit/form__submit.css');
-@import url('blocks/form/__submit/_disabled/form__submit_disbled.css');

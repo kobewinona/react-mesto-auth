@@ -2,8 +2,6 @@
   width: calc(100% - (19px * 2));
   max-width: 345px;
   
-  /*font-size: 0;*/
-  
   margin: 0 auto;
 }
 

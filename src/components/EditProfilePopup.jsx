@@ -44,6 +44,7 @@ const EditProfilePopup = memo(props => {
         isShown={props.isOpen}
         defaultValue={currentUser.name}
         onUpdate={handleValuesUpdate}
+        formPlace="popup"
         name="userName"
         type="text"
         placeholder="Имя"
@@ -56,6 +57,7 @@ const EditProfilePopup = memo(props => {
         isShown={props.isOpen}
         defaultValue={currentUser.about}
         onUpdate={handleValuesUpdate}
+        formPlace="popup"
         name="userAbout"
         type="text"
         placeholder="Описание"

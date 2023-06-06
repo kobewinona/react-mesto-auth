@@ -1,5 +1,5 @@
 import {useCallback, useState, useEffect} from 'react';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 
 import api from '../utils/Api';
 import {AuthContext} from '../contexts/AuthContext';
@@ -191,6 +191,7 @@ const App = () => {
           />
           <Route path="/sign-up" element={<Register/>}/>
           <Route path="/sign-in" element={<Login/>}/>
+          <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
       </AuthContext.Provider>
       <Footer/>

@@ -22,7 +22,7 @@ const PopupWithForm = memo(props => {
         />
         <h2 className="popup__title">{props.title}</h2>
         {props.validate
-          ? <FormWithValidation onSubmit={props.onSubmit} {...props}>
+          ? <FormWithValidation onSubmit={props.onSubmit} formPlace="popup" {...props}>
             {props.children}
           </FormWithValidation>
           : <form

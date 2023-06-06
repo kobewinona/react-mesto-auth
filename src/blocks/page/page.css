@@ -5,6 +5,9 @@
   font-family: 'Inter', Tahoma, sans-serif;
   font-style: normal;
   
+  display: grid;
+  grid-template-rows: max-content 100% max-content;
+  
   background-color: #000;
   
   margin: 0;

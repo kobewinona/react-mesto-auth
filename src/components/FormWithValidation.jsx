@@ -3,7 +3,7 @@ import {memo, useState, useEffect} from 'react';
 import Spinner from './Spinner';
 
 
-const FormWithValidation = memo(props => {
+const FormWithValidation = memo(({formPlace, ...props}) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [inputsValidity, setInputsValidity] = useState({});
   
@@ -51,7 +51,7 @@ const FormWithValidation = memo(props => {
   
   return (
     <form
-      className="form"
+      className={`${formPlace}__form`}
       name={props.name}
       onChange={handleChange}
       onSubmit={handleSubmit}
@@ -61,7 +61,7 @@ const FormWithValidation = memo(props => {
       {props.isLoading
         ? <Spinner />
         : <button
-          className={`form__submit ${!isFormValid && 'form__submit_disabled'}`}
+          className={`${formPlace}__form-submit ${!isFormValid && `${formPlace}__form-submit_disabled`}`}
           type="submit"
           name="submit"
           disabled={!isFormValid}

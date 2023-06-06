@@ -31,6 +31,7 @@ const EditAvatarPopup = memo(props => {
         ref={avatarInputRef}
         isShown={props.isOpen}
         onUpdate={handleValueUpdate}
+        formPlace="popup"
         name="userAvatar"
         type="url"
         placeholder="Ссылка на изображение"
