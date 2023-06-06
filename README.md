@@ -18,10 +18,9 @@
 
 ## about this project
 
-This is my first project using `React` and `Create React App`. So far, I've only gone through the basics, but I already feel like it's an awesome way to create a web app quickly and conveniently, thanks to the `Virtual DOM`. It's also easier to write, although the `JSX` code looks a little messier to me. Overall, I'm really excited about using `React` and can't wait to learn more about it! 
+This is my project using `React` and `Create React App` with authorization and registration. In this project I’m learning about `JWT`, `localStorage` and `protected routes`.
 
-The website is all about showcasing different places in Russia, and it allows you to personalize your profile by
-changing your name and job, uploading new pictures of interesting locations, and even giving them a little ❤️.
+The website is all about showcasing different places in Russia, and it allows you to personalize your profile by changing your name and job, uploading new pictures of interesting locations, and even giving them a little ❤️.
 
 ---
 

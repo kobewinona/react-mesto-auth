@@ -119,13 +119,14 @@ const App = () => {
     setSelectedCard(card);
   }, [isPopupOpen]);
   
+  // noinspection com.haulmont.rcb.ExhaustiveDepsInspection
   const handleCardLikeClick = useCallback(card => {
     const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
   
     api.changeLikeCardStatus(card['_id'], isLiked)
       .then(newCard => setCards(cards.map(c => c['_id'] === card['_id'] ? newCard : c)))
       .catch(err => console.log(err));
-  }, [cards, currentUser._id]);
+  }, [cards, currentUser]);
   
   
   // handle forms
