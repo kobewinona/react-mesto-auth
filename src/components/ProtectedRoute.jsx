@@ -8,7 +8,7 @@ const ProtectedRoute = ({element: Component, ...props}) => {
   const isLoggedIn = useContext(AuthContext);
   
   return (
-    isLoggedIn ? <Component {...props}/> : <Navigate to="sign-up" replace/>
+    isLoggedIn ? <Component {...props}/> : <Navigate to="sign-up" replace={true}/>
   );
 };
 

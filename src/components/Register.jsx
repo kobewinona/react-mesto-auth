@@ -32,7 +32,7 @@ const Register = props => {
         </div>
       </FormWithValidation>
       <p className="auth__text">Уже зарегистрированы?
-        <Link to="/sign-in" className="auth__login-link"> Войти</Link>
+        <Link className="auth__link" to="/sign-in"> Войти</Link>
       </p>
     </section>
   );
