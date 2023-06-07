@@ -1,9 +1,22 @@
+import {useState} from 'react';
+
 import FormWithValidation from './FormWithValidation';
 
 
 const Login = props => {
-  const handleSubmit = event => {
-    event.preventDefault();
+  const [inputValues, setInputValues] = useState({});
+  
+  const handleValuesUpdate = event => {
+    setInputValues((prevValues) => ({
+      ...prevValues, [event.target.name]: event.target.value
+    }));
+  };
+  
+  const handleSubmit = () => {
+    props.onSignIn({
+      email: inputValues['userEmail'],
+      password: inputValues['userPassword']
+    });
   };
   
   return (
@@ -13,6 +26,7 @@ const Login = props => {
         <div className="auth__inputs-container">
           <input
             className="auth__form-input"
+            onChange={handleValuesUpdate}
             name="userEmail"
             type="email"
             placeholder="Email"
@@ -21,6 +35,7 @@ const Login = props => {
           />
           <input
             className="auth__form-input"
+            onChange={handleValuesUpdate}
             name="userPassword"
             type="password"
             placeholder="Пароль"

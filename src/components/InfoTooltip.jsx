@@ -2,7 +2,7 @@ import {useState} from 'react';
 
 
 const InfoTooltip = () => {
-  const [isShown, setIsShown] = useState(true);
+  const [isShown, setIsShown] = useState(false);
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(true);
   
   return (

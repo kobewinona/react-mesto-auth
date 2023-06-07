@@ -3,12 +3,20 @@ import {Navigate} from 'react-router-dom';
 
 import {AuthContext} from '../contexts/AuthContext';
 
+import Spinner from './Spinner';
 
-const ProtectedRoute = ({element: Component, ...props}) => {
-  const isLoggedIn = useContext(AuthContext);
+
+const ProtectedRoute = ({element: Component, isLoading, ...props}) => {
+  const {isLoggedIn} = useContext(AuthContext);
+  
+  if (isLoading) {
+    return (
+      <Spinner/>
+    )
+  }
   
   return (
-    isLoggedIn ? <Component {...props}/> : <Navigate to="sign-up" replace={true}/>
+    isLoggedIn ? <Component {...props}/> : <Navigate to="sign-in" replace={true}/>
   );
 };
 

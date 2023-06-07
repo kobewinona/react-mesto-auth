@@ -2,6 +2,8 @@ import {memo, useState, useEffect} from 'react';
 
 import Spinner from './Spinner';
 
+//TODO transform into HOC
+
 
 const FormWithValidation = memo(({formPlace, ...props}) => {
   const [isFormValid, setIsFormValid] = useState(false);
@@ -59,7 +61,7 @@ const FormWithValidation = memo(({formPlace, ...props}) => {
     >
       {props.children}
       {props.isLoading
-        ? <Spinner />
+        ? <Spinner/>
         : <button
           className={`${formPlace}__form-submit ${!isFormValid && `${formPlace}__form-submit_disabled`}`}
           type="submit"

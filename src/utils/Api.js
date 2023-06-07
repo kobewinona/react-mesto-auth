@@ -31,9 +31,7 @@ class Api {
     return this._setRequest(`${this._url}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        'avatar': avatar
-      })
+      body: JSON.stringify({avatar})
     }).then(res => this._returnRes(res));
   }
   
@@ -41,10 +39,7 @@ class Api {
     return this._setRequest(`${this._url}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({
-        'name': name,
-        'about': about
-      })
+      body: JSON.stringify({name, about})
     }).then(res => this._returnRes(res));
   }
   
@@ -61,10 +56,7 @@ class Api {
     return this._setRequest(`${this._url}/cards`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({
-        'name': name,
-        'link': link
-      })
+      body: JSON.stringify({name, link})
     }).then(res => this._returnRes(res));
   }
   

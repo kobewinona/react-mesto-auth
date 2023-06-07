@@ -11,6 +11,35 @@ const PopupWithForm = memo(props => {
     setTimeout(() => submitButtonRef.current?.focus(), 50);
   }
   
+  const renderFormWithValidation = () => {
+    return (
+      <FormWithValidation onSubmit={props.onSubmit} formPlace="popup" {...props}>
+        {props.children}
+      </FormWithValidation>
+    )
+  }
+  
+  const renderForm = () => {
+    return (
+      <form
+        className="form"
+        name={props.name}
+        onSubmit={props.onSubmit}
+        noValidate
+      >
+        {props.isLoading
+          ? <Spinner/>
+          : <button
+            ref={submitButtonRef}
+            className="popup__form-submit"
+            type="submit"
+            name="submit"
+            autoFocus
+          >{props.submitText || 'Сохранить'}</button>}
+      </form>
+    )
+  }
+  
   return (
     <section className={`popup popup_base_light ${props.isOpen && 'popup_opened'}`} onClick={props.onClose}>
       <div
@@ -21,27 +50,7 @@ const PopupWithForm = memo(props => {
           className="close-button" type="button" aria-label="Закрыть." onClick={props.onClose}
         />
         <h2 className="popup__title">{props.title}</h2>
-        {props.validate
-          ? <FormWithValidation onSubmit={props.onSubmit} formPlace="popup" {...props}>
-            {props.children}
-          </FormWithValidation>
-          : <form
-            className="form"
-            name={props.name}
-            onSubmit={props.onSubmit}
-            noValidate
-          >
-            {props.isLoading
-              ? <Spinner />
-              : <button
-                ref={submitButtonRef}
-                className="form__submit"
-                type="submit"
-                name="submit"
-                autoFocus
-              >{props.submitText || 'Сохранить'}</button>}
-          </form>
-        }
+        {props.validate ? renderFormWithValidation() : renderForm()}
       </div>
     </section>
   );

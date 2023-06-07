@@ -10,7 +10,7 @@ const ImagePopup = ({card, isOpen, onClose}) => {
         onClick={event => event.stopPropagation()}
       >
         <button
-          className="popup__close-button"
+          className="close-button"
           type="button"
           aria-label="Закрыть."
           onClick={onClose}

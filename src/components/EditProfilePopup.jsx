@@ -18,10 +18,7 @@ const EditProfilePopup = memo(props => {
   }, []);
   
   const handleSubmit = useCallback(() => {
-    props.onUpdateUser({
-      name: inputValues['userName'],
-      about: inputValues['userAbout']
-    });
+    props.onUpdateUser(inputValues);
   }, [props, inputValues]);
   
   useEffect(() => {

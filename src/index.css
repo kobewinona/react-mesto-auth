@@ -5,6 +5,12 @@
 @import url('blocks/grow/grow.css');
 @import url('blocks/shrink/shrink.css');
 
+@import url('blocks/burger/burger.css');
+@import url('blocks/burger/__icon/burger__icon.css');
+@import url('blocks/burger/__icon/_turned-into-cross/burger__icon_turned-into-cross.css');
+@import url('blocks/burger/__turn/_into/burger__turn_into_cross.css');
+@import url('blocks/burger/__turn/_into/burger__turn_into_bruger.css');
+
 @import url('blocks/spinner/spinner.css');
 @import url('blocks/spinner/__container/spinner__container.css');
 @import url('blocks/spinner/__wheel/spinner__wheel.css');
@@ -17,6 +23,11 @@
 @import url('blocks/header/__container/header__container.css');
 @import url('blocks/header/__logo/header__logo.css');
 @import url('blocks/header/__link/header__link.css');
+@import url('blocks/header/__account/header__account.css');
+@import url('blocks/header/__account/_opend/header__account_opened.css');
+@import url('blocks/header/__account-container/header__account-container.css');
+@import url('blocks/header/__account-user-info/header__account-user-info.css');
+@import url('blocks/header/__account-button/header__account-button.css');
 
 @import url('blocks/auth/auth.css');
 @import url('blocks/auth/__title/auth__title.css');
@@ -65,8 +76,8 @@
 
 @import url('blocks/popup/popup.css');
 @import url('blocks/popup/_opened/popup_opened.css');
-@import url('blocks/popup/_type/popup_base_light.css');
-@import url('blocks/popup/_type/popup_base_dark.css');
+@import url('blocks/popup/_base/popup_base_light.css');
+@import url('blocks/popup/_base/popup_base_dark.css');
 @import url('blocks/popup/__container/popup__container.css');
 @import url('blocks/popup/__form/popup__form.css');
 @import url('blocks/popup/__form-input/popup__form-input.css');

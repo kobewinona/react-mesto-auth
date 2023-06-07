@@ -3,13 +3,12 @@
   height: 100vh;
   
   display: flex;
-  visibility: hidden;
-  position: fixed;
-  flex-direction: column;
-  
   justify-content: center;
-  
   align-items: center;
+  
+  visibility: hidden;
+  
+  position: fixed;
   
   top: 0;
   left: 0;

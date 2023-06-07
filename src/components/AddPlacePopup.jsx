@@ -14,11 +14,8 @@ const AddPlacePopup = memo(props => {
   }, []);
   
   const handleSubmit = useCallback(() => {
-    props.onAddPlace({
-      name: inputValues.placeName,
-      link: inputValues.placeLink
-    })
-  }, [props, inputValues.placeName, inputValues.placeLink]);
+    props.onAddPlace(inputValues)
+  }, [props, inputValues]);
   
   return (
     <PopupWithForm

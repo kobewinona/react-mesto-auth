@@ -14,7 +14,7 @@ const EditAvatarPopup = memo(props => {
   }, []);
   
   const handleSubmit = useCallback(() => {
-    props.onUpdateAvatar({avatar: inputValue['userAvatar']});
+    props.onUpdateAvatar(inputValue);
     
     avatarInputRef.current.value = '';
   }, [props, inputValue]);
