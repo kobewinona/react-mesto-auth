@@ -16,6 +16,7 @@ import DeletePlacePopup from './DeletePlacePopup';
 import ImagePopup from './ImagePopup';
 import Register from './Register';
 import Login from './Login';
+import InfoTooltip from './InfoTooltip';
 
 
 const App = () => {
@@ -172,39 +173,39 @@ const App = () => {
   };
   
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <Header/>
-      <AuthContext.Provider value={isLoggedIn}>
-        <Routes>
-          <Route path="/" element={
-            <ProtectedRoute
-              element={Main}
-              cards={cards}
-              onEditAvatar={handleEditAvatarClick}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onCardClick={handleCardClick}
-              onCardLikeClick={handleCardLikeClick}
-              onCardDeleteClick={handleDeletePlaceClick}
+    <AuthContext.Provider value={isLoggedIn}>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Header/>
+          <Routes>
+            <Route path="/" element={
+              <ProtectedRoute
+                element={Main}
+                cards={cards}
+                onEditAvatar={handleEditAvatarClick}
+                onEditProfile={handleEditProfileClick}
+                onAddPlace={handleAddPlaceClick}
+                onCardClick={handleCardClick}
+                onCardLikeClick={handleCardLikeClick}
+                onCardDeleteClick={handleDeletePlaceClick}
+              />
+            }
             />
-          }
-          />
-          <Route path="/sign-up" element={<Register/>}/>
-          <Route path="/sign-in" element={<Login/>}/>
-          <Route path="*" element={<Navigate to="/"/>}/>
-        </Routes>
-      </AuthContext.Provider>
+            <Route path="/sign-up" element={<Register/>}/>
+            <Route path="/sign-in" element={<Login/>}/>
+            <Route path="*" element={<Navigate to="/"/>}/>
+          </Routes>
+        <EditProfilePopup
+          isOpen={isPopupOpen.editProfilePopup}
+          onUpdateUser={handleUpdateUser}
+          isLoading={isLoading}
+          onClose={closeAllPopups}
+          validate={true}
+        />
+      </CurrentUserContext.Provider>
       <Footer/>
       <EditAvatarPopup
         isOpen={isPopupOpen.editAvatarPopup}
         onUpdateAvatar={handleUpdateAvatar}
-        isLoading={isLoading}
-        onClose={closeAllPopups}
-        validate={true}
-      />
-      <EditProfilePopup
-        isOpen={isPopupOpen.editProfilePopup}
-        onUpdateUser={handleUpdateUser}
         isLoading={isLoading}
         onClose={closeAllPopups}
         validate={true}
@@ -229,7 +230,8 @@ const App = () => {
         isOpen={isPopupOpen.cardPreviewPopup}
         onClose={closeAllPopups}
       />
-    </CurrentUserContext.Provider>
+      <InfoTooltip />
+    </AuthContext.Provider>
   );
 };
 

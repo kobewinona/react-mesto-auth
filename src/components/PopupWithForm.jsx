@@ -18,7 +18,7 @@ const PopupWithForm = memo(props => {
         onClick={event => event.stopPropagation()}
       >
         <button
-          className="popup__close-button" type="button" aria-label="Закрыть." onClick={props.onClose}
+          className="close-button" type="button" aria-label="Закрыть." onClick={props.onClose}
         />
         <h2 className="popup__title">{props.title}</h2>
         {props.validate
@@ -42,7 +42,6 @@ const PopupWithForm = memo(props => {
               >{props.submitText || 'Сохранить'}</button>}
           </form>
         }
-        
       </div>
     </section>
   );

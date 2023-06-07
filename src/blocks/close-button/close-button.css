@@ -1,11 +1,11 @@
-.popup__close-button {
+.close-button {
   width: 20px;
   height: 20px;
   
   cursor: pointer;
   
   background-color: transparent;
-  background-image: url('../../../images/close-popup-pict.svg');
+  background-image: url('../../images/close-popup-pict.svg');
   background-repeat: no-repeat;
   background-size: contain;
   
@@ -18,14 +18,14 @@
   transition: opacity .4s ease-out;
 }
 
-.popup__close-button:hover {
+.close-button:hover {
   opacity: .6;
   
   transition: opacity .2s ease-in;
 }
 
 @media (min-width: 768px) {
-  .popup__close-button {
+  .close-button {
     width: 32px;
     height: 32px;
     
