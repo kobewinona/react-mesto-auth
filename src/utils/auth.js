@@ -1,42 +1,42 @@
-const BASE_URL = 'https://auth.nomoreparties.co';
+import {authConfig} from './props';
+
+
+// set request and response
+
+const setRequest = (url, config) => {
+  return fetch(url, config);
+}
 
 const returnRes = res => {
   if (res.ok) {
     return res.json();
   } else {
-    return Promise.reject(`Ошибка: ${res.status}`)
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 };
 
+
+// set requests by method
+
 export const register = ({email, password}) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return setRequest(`${authConfig['url']}/signup`, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers: authConfig['headers'],
     body: JSON.stringify({email, password})
-  }).then(res => returnRes(res));
+  }).then(res => returnRes(res))
 }
 
 export const authorize = ({email, password}) => {
-  return fetch(`${BASE_URL}/signin`, {
+  return setRequest(`${authConfig['url']}/signin`, {
     method: 'POST',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers: authConfig['headers'],
     body: JSON.stringify({email, password})
   }).then(res => returnRes(res));
 }
 
 export const getContent = token => {
-  return fetch(`${BASE_URL}/users/me`, {
+  return setRequest(`${authConfig['url']}/users/me`, {
     method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
+    headers: {...authConfig['headers'], 'Authorization': `Bearer ${token}`}
   }).then(res => returnRes(res));
 }

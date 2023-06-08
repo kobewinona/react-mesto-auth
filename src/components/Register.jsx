@@ -6,7 +6,7 @@ import FormWithValidation from './FormWithValidation';
 
 const Register = props => {
   const [inputValues, setInputValues] = useState({});
-  
+
   const handleValuesUpdate = event => {
     setInputValues((prevValues) => ({
       ...prevValues, [event.target.name]: event.target.value
@@ -19,11 +19,18 @@ const Register = props => {
       password: inputValues['userPassword']
     });
   };
-  
+
   return (
     <section className="auth">
       <h2 className="auth__title">Регистрация</h2>
-      <FormWithValidation submitText="Зарегистрироваться" onSubmit={handleSubmit} formPlace="auth" {...props}>
+      <FormWithValidation
+        submitText="Зарегистрироваться"
+        onSubmit={handleSubmit}
+        formPlace="auth"
+        theme="dark"
+        size="small"
+        {...props}
+      >
         <div className="auth__inputs-container">
           <input
             className="auth__form-input"

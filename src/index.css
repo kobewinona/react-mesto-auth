@@ -13,7 +13,13 @@
 
 @import url('blocks/spinner/spinner.css');
 @import url('blocks/spinner/__container/spinner__container.css');
+@import url('blocks/spinner/__container/_size/spinner__container_size_small.css');
+@import url('blocks/spinner/__container/_size/spinner__container_size_big.css');
 @import url('blocks/spinner/__wheel/spinner__wheel.css');
+@import url('blocks/spinner/__wheel/_size/spinner__wheel_size_small.css');
+@import url('blocks/spinner/__wheel/_size/spinner__wheel_size_big.css');
+@import url('blocks/spinner/__wheel/_theme/spinner__wheel_theme_light.css');
+@import url('blocks/spinner/__wheel/_theme/spinner__wheel_theme_dark.css');
 
 @import url('blocks/close-button/close-button.css');
 
@@ -81,7 +87,8 @@
 @import url('blocks/popup/__container/popup__container.css');
 @import url('blocks/popup/__form/popup__form.css');
 @import url('blocks/popup/__form-input/popup__form-input.css');
-@import url('blocks/popup/__form-input-error/popup__form-input-error.css');
+@import url('blocks/popup/__form-input/_invalid/popup__form-input_invalid.css');
+@import url('blocks/popup/__form-error-message/popup__form-error-message.css');
 @import url('blocks/popup/__form-submit/popup__form-submit.css');
 @import url('blocks/popup/__form-submit/_disabled/popup__form-submit_disabled.css');
 @import url('blocks/popup/__container/_type/popup__container_type_form.css');

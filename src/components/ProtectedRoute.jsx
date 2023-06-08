@@ -11,7 +11,7 @@ const ProtectedRoute = ({element: Component, isLoading, ...props}) => {
   
   if (isLoading) {
     return (
-      <Spinner/>
+      <Spinner theme="dark" size="big"/>
     )
   }
   

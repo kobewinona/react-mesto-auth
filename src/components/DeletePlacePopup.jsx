@@ -4,6 +4,7 @@ import PopupWithForm from './PopupWithForm';
 
 
 const DeletePlacePopup = memo(props => {
+  console.log(props);
   const handleSubmit = useCallback(event => {
     event.preventDefault();
     

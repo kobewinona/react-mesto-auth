@@ -11,9 +11,17 @@ const PopupWithForm = memo(props => {
     setTimeout(() => submitButtonRef.current?.focus(), 50);
   }
   
+  //TODO fix this
+  
   const renderFormWithValidation = () => {
     return (
-      <FormWithValidation onSubmit={props.onSubmit} formPlace="popup" {...props}>
+      <FormWithValidation
+        onSubmit={props.onSubmit}
+        formPlace="popup"
+        theme="light"
+        size="small"
+        {...props}
+      >
         {props.children}
       </FormWithValidation>
     )
@@ -27,8 +35,8 @@ const PopupWithForm = memo(props => {
         onSubmit={props.onSubmit}
         noValidate
       >
-        {props.isLoading
-          ? <Spinner/>
+        {props.isUpdating
+          ? <Spinner theme="light" size="small"/>
           : <button
             ref={submitButtonRef}
             className="popup__form-submit"

@@ -1,4 +1,4 @@
-.popup__form-input-error {
+.popup__form-error-message {
   width: calc(100% - (22px * 2));
   max-width: 358px;
   min-height: 24px;

@@ -2,10 +2,8 @@ import {memo, useState, useEffect} from 'react';
 
 import Spinner from './Spinner';
 
-//TODO transform into HOC
 
-
-const FormWithValidation = memo(({formPlace, ...props}) => {
+const FormWithValidation = memo(props => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [inputsValidity, setInputsValidity] = useState({});
   
@@ -22,12 +20,12 @@ const FormWithValidation = memo(({formPlace, ...props}) => {
   
   const validateForm = () => {
     const inputValues = Object.values(inputsValidity);
-
+    
     if (inputValues.length === 0) {
       setIsFormValid(false);
       return;
     }
-
+    
     setIsFormValid(inputValues.every((i) => i === true));
   }
   
@@ -40,10 +38,10 @@ const FormWithValidation = memo(({formPlace, ...props}) => {
     
     setIsFormValid(false);
   }
-
+  
   useEffect(() => {
     validateForm();
-  
+    
     // eslint-disable-next-line
   }, [inputsValidity])
   
@@ -53,17 +51,17 @@ const FormWithValidation = memo(({formPlace, ...props}) => {
   
   return (
     <form
-      className={`${formPlace}__form`}
+      className={`${props.formPlace}__form`}
       name={props.name}
       onChange={handleChange}
       onSubmit={handleSubmit}
       noValidate
     >
       {props.children}
-      {props.isLoading
-        ? <Spinner/>
+      {props.isUpdating
+        ? <Spinner theme={props.theme} size={props.size}/>
         : <button
-          className={`${formPlace}__form-submit ${!isFormValid && `${formPlace}__form-submit_disabled`}`}
+          className={`${props.formPlace}__form-submit ${!isFormValid && `${props.formPlace}__form-submit_disabled`}`}
           type="submit"
           name="submit"
           disabled={!isFormValid}

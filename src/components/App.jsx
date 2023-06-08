@@ -1,7 +1,7 @@
 import {useCallback, useState, useEffect} from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
+import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
-import api from '../utils/Api';
+import * as api from '../utils/api';
 import * as auth from '../utils/auth';
 import {AuthContext} from '../contexts/AuthContext';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
@@ -26,6 +26,7 @@ const App = () => {
   
   const [currentUser, setCurrentUser] = useState({});
   
+  const [isAuthSuccessful, setIsAuthSuccessful] = useState(false);
   const [authInfo, setAuthInfo] = useState({isLoggedIn: true, userEmail: ''});
   
   const [isPopupOpen, setIsPopupOpen] = useState({
@@ -33,9 +34,11 @@ const App = () => {
     editProfilePopup: false,
     addPlacePopup: false,
     deletePlacePopup: false,
-    cardPreviewPopup: false
+    cardPreviewPopup: false,
+    infoToolTip: false
   });
   
+  const [isUpdating, setIsUpdating] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   
   const [cards, setCards] = useState([]);
@@ -55,35 +58,63 @@ const App = () => {
       .finally(() => setIsLoading(false));
   }, []);
   
-  // handle authorization
+  
+  // handle registration and authorization
   
   const handleSignUp = userInfo => {
     setIsLoading(true);
+    setIsUpdating(true);
     
     auth.register(userInfo)
-      .then(() => navigate('/sign-in', {replace: true}))
-      .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .then(() => {
+        setIsAuthSuccessful(true);
+        handleInfoToolTip();
+  
+        navigate('/sign-in', {replace: true})
+      })
+      .catch(err => {
+        setIsAuthSuccessful(false);
+        handleInfoToolTip();
+        
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUpdating(false);
+      });
   }
   
   const handleSignIn = userInfo => {
     setIsLoading(true);
+    setIsUpdating(true);
     
     auth.authorize(userInfo)
       .then(data => {
+        
         setAuthInfo({...authInfo,
           ['isLoggedIn']: true
         });
+        
         localStorage.setItem('jwt', data['token']);
-        navigate('/', {replace: true});
         handleAuth(data['token'])
+        
+        navigate('/', {replace: true});
       })
-      .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .catch(err => {
+        setIsAuthSuccessful(false);
+        handleInfoToolTip();
+        
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+        setIsUpdating(false);
+      });
   }
   
   const handleAuth = () => {
     setIsLoading(true);
+    setIsUpdating(true);
     
     const jwt = localStorage.getItem('jwt');
     
@@ -98,13 +129,17 @@ const App = () => {
           navigate('/', {replace: true});
         })
         .catch(err => console.log(err))
-        .finally(() => setIsLoading(false));
+        .finally(() => {
+          setIsLoading(false);
+          setIsUpdating(false);
+        });
     } else {
       setAuthInfo({...authInfo,
         ['userEmail']: '',
         ['isLoggedIn']: false
       });
       setIsLoading(false);
+      setIsUpdating(false);
     }
   }
   
@@ -114,14 +149,24 @@ const App = () => {
     handleAuth(jwt);
   }, []);
   
+  
+  // handle sign out
+  
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
+    handleAuth();
     
     navigate('/sign-in');
   }
   
   
   // handle open popup
+  
+  const handleInfoToolTip = useCallback(() => {
+    setIsPopupOpen({...isPopupOpen,
+      infoToolTip: true
+    });
+  }, [isPopupOpen])
   
   const handleEditAvatarClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
@@ -158,7 +203,8 @@ const App = () => {
       editProfilePopup: false,
       addPlacePopup: false,
       deletePlacePopup: false,
-      cardPreviewPopup: false
+      cardPreviewPopup: false,
+      infoToolTip: false
     });
     const cleanUp = () => setSelectedCard({});
     setTimeout(cleanUp, 200);
@@ -204,43 +250,43 @@ const App = () => {
   // handle forms
   
   const handleUpdateAvatar = ({userAvatar}) => {
-    setIsLoading(true);
+    setIsUpdating(true);
     
     api.patchUserAvatar({avatar: userAvatar})
       .then(res => setCurrentUser(res))
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsUpdating(false));
   };
   
   const handleUpdateUser = ({userName, userAbout}) => {
-    setIsLoading(true);
+    setIsUpdating(true);
     
     api.patchUserInfo({name: userName, about: userAbout})
       .then(res => setCurrentUser(res))
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsUpdating(false));
   };
   
   const handleAddPlace = ({placeName, placeLink}) => {
-    setIsLoading(true);
+    setIsUpdating(true);
     
     api.postCard({name: placeName, link: placeLink})
       .then(card => setCards([card, ...cards]))
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsUpdating(false));
   };
   
   const handleDeletePlace = card => {
-    setIsLoading(true);
+    setIsUpdating(true);
     
     api.deleteCard(card['_id'])
       .then(() => setCards(cards.filter(c => c['_id'] !== card['_id'])))
       .then(() => closeAllPopups())
       .catch(err => console.log(err))
-      .finally(() => setIsLoading(false));
+      .finally(() => setIsUpdating(false));
   };
   
   return (
@@ -256,6 +302,7 @@ const App = () => {
                 element={Main}
                 cards={cards}
                 isLoading={isLoading}
+                isUpdating={isUpdating}
                 onEditAvatar={handleEditAvatarClick}
                 onEditProfile={handleEditProfileClick}
                 onAddPlace={handleAddPlaceClick}
@@ -265,14 +312,14 @@ const App = () => {
               />
             }
             />
-            <Route path="/sign-up" element={<Register onSignUp={handleSignUp}/>}/>
-            <Route path="/sign-in" element={<Login onSignIn={handleSignIn}/>}/>
-            {/*<Route path="*" element={<Navigate to="/" replace/>}/>*/}
+            <Route path="/sign-up" element={<Register onSignUp={handleSignUp} isUpdating={isUpdating}/>}/>
+            <Route path="/sign-in" element={<Login onSignIn={handleSignIn} isUpdating={isUpdating}/>}/>
+            <Route path="*" element={<Navigate to="/" replace/>}/>
           </Routes>
         <EditProfilePopup
           isOpen={isPopupOpen.editProfilePopup}
           onUpdateUser={handleUpdateUser}
-          isLoading={isLoading}
+          isUpdating={isUpdating}
           onClose={closeAllPopups}
           validate={true}
         />
@@ -281,14 +328,14 @@ const App = () => {
       <EditAvatarPopup
         isOpen={isPopupOpen.editAvatarPopup}
         onUpdateAvatar={handleUpdateAvatar}
-        isLoading={isLoading}
+        isUpdating={isUpdating}
         onClose={closeAllPopups}
         validate={true}
       />
       <AddPlacePopup
         isOpen={isPopupOpen.addPlacePopup}
         onAddPlace={handleAddPlace}
-        isLoading={isLoading}
+        isUpdating={isUpdating}
         onClose={closeAllPopups}
         validate={true}
       />
@@ -296,7 +343,7 @@ const App = () => {
         isOpen={isPopupOpen.deletePlacePopup}
         onDeletePlace={handleDeletePlace}
         cardToDelete={cardToDelete}
-        isLoading={isLoading}
+        isUpdating={isUpdating}
         onClose={closeAllPopups}
         validate={false}
       />
@@ -305,7 +352,10 @@ const App = () => {
         isOpen={isPopupOpen.cardPreviewPopup}
         onClose={closeAllPopups}
       />
-      <InfoTooltip />
+      <InfoTooltip
+        isOpen={isPopupOpen.infoToolTip}
+        isAuthSuccessful={isAuthSuccessful}
+        onClose={closeAllPopups}/>
     </AuthContext.Provider>
   );
 };
