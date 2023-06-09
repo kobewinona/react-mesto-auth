@@ -314,14 +314,12 @@ const App = () => {
         onUpdateAvatar={handleUpdateAvatar}
         isUpdating={isUpdating}
         onClose={closeAllPopups}
-        validate={true}
       />
       <AddPlacePopup
         isOpen={isPopupOpen.addPlacePopup}
         onAddPlace={handleAddPlace}
         isUpdating={isUpdating}
         onClose={closeAllPopups}
-        validate={true}
       />
       <DeletePlacePopup
         isOpen={isPopupOpen.deletePlacePopup}
@@ -329,7 +327,6 @@ const App = () => {
         cardToDelete={cardToDelete}
         isUpdating={isUpdating}
         onClose={closeAllPopups}
-        validate={false}
       />
       <ImagePopup
         card={selectedCard}

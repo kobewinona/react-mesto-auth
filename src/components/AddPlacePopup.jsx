@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 import PopupWithForm from './PopupWithForm';
-import InputWithValidation from './InputWithValidation';
+import Input from './Input';
 
 
 const AddPlacePopup = props => {
@@ -19,16 +19,18 @@ const AddPlacePopup = props => {
   
   return (
     <PopupWithForm
+      onSubmit={handleSubmit}
+      validate={true}
       title="Новое место"
       name="add-place"
       submitText="Создать"
-      onSubmit={handleSubmit}
       {...props}
     >
-      <InputWithValidation
+      <Input
         isShown={props.isOpen}
         onUpdate={handleValuesUpdate}
-        formPlace="popup"
+        validate={true}
+        place="popup"
         name="placeName"
         type="text"
         placeholder="Название"
@@ -37,10 +39,11 @@ const AddPlacePopup = props => {
         maxLength="30"
         required
       />
-      <InputWithValidation
+      <Input
         isShown={props.isOpen}
         onUpdate={handleValuesUpdate}
-        formPlace="popup"
+        validate={true}
+        place="popup"
         name="placeLink"
         type="url"
         placeholder="Ссылка на изображение"

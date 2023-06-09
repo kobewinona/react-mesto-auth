@@ -7,7 +7,7 @@
   
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: max-content 100% max-content;
+  grid-template-rows: max-content auto max-content;
   
   background-color: #000;
   

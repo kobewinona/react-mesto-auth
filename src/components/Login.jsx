@@ -1,6 +1,7 @@
 import {useState} from 'react';
 
-import FormWithValidation from './FormWithValidation';
+import Form from './Form';
+import Input from './Input';
 
 
 const Login = props => {
@@ -25,29 +26,32 @@ const Login = props => {
   return (
     <section className="auth">
       <h2 className="auth__title">Вход</h2>
-        <FormWithValidation
+        <Form
           onSubmit={handleSubmit}
+          validate={true}
           submitText="Войти"
-          formPlace="auth"
+          place="auth"
           theme="dark"
           size="small"
           {...props}
         >
           <div className="auth__inputs-container">
-            <input
+            <Input
               onChange={handleEmailValueUpdate}
-              value={emailValue}
-              className="auth__form-input"
+              value={emailValue || ''}
+              validate={false}
+              place="auth"
               name="userEmail"
               type="email"
               placeholder="Email"
               aria-label="Email."
               required
             />
-            <input
+            <Input
               onChange={handlePasswordValueUpdate}
-              value={passwordValue}
-              className="auth__form-input"
+              value={passwordValue || ''}
+              validate={false}
+              place="auth"
               name="userPassword"
               type="password"
               placeholder="Пароль"
@@ -55,7 +59,7 @@ const Login = props => {
               required
             />
           </div>
-        </FormWithValidation>
+        </Form>
     </section>
   );
 };

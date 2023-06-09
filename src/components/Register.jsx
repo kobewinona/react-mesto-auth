@@ -1,7 +1,8 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 
-import FormWithValidation from './FormWithValidation';
+import Form from './Form';
+import Input from './Input';
 
 
 const Register = props => {
@@ -26,29 +27,32 @@ const Register = props => {
   return (
     <section className="auth">
       <h2 className="auth__title">Регистрация</h2>
-      <FormWithValidation
+      <Form
         onSubmit={handleSubmit}
+        validate={true}
         submitText="Зарегистрироваться"
-        formPlace="auth"
+        place="auth"
         theme="dark"
         size="small"
         {...props}
       >
         <div className="auth__inputs-container">
-          <input
+          <Input
             onChange={handleEmailValueUpdate}
             value={emailValue}
-            className="auth__form-input"
+            validate={false}
+            place="auth"
             name="userEmail"
             type="email"
             placeholder="Email"
             aria-label="Email."
             required
           />
-          <input
+          <Input
             onChange={handlePasswordValueUpdate}
             value={passwordValue}
-            className="auth__form-input"
+            validate={false}
+            place="auth"
             name="userPassword"
             type="password"
             placeholder="Пароль"
@@ -56,7 +60,7 @@ const Register = props => {
             required
           />
         </div>
-      </FormWithValidation>
+      </Form>
       <p className="auth__text">Уже зарегистрированы?
         <Link className="auth__link" to="/sign-in"> Войти</Link>
       </p>

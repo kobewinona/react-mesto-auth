@@ -2,15 +2,14 @@ import PopupWithForm from './PopupWithForm';
 
 
 const DeletePlacePopup = props => {
-  const handleSubmit = event => {
-    event.preventDefault();
-    
+  const handleSubmit = () => {
     props.onDeletePlace(props.cardToDelete)
   };
   
   return(
     <PopupWithForm
       onSubmit={handleSubmit}
+      validate={false}
       title="Уверены?"
       name="delete-place"
       submitText="Да"

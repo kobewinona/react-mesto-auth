@@ -3,7 +3,7 @@ import {useState, useEffect, useContext} from 'react';
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 import PopupWithForm from './PopupWithForm';
-import InputWithValidation from './InputWithValidation';
+import Input from './Input';
 
 
 const EditProfilePopup = props => {
@@ -31,17 +31,19 @@ const EditProfilePopup = props => {
   
   return (
     <PopupWithForm
+      onSubmit={handleSubmit}
+      validate={true}
       title="Редактировать профиль"
       name="edit-profile"
       submitText="Сохранить"
-      onSubmit={handleSubmit}
       {...props}
     >
-      <InputWithValidation
+      <Input
         isShown={props.isOpen}
         defaultValue={currentUser.name}
         onUpdate={handleValuesUpdate}
-        formPlace="popup"
+        validate={true}
+        place="popup"
         name="userName"
         type="text"
         placeholder="Имя"
@@ -50,11 +52,12 @@ const EditProfilePopup = props => {
         maxLength="40"
         required
       />
-      <InputWithValidation
+      <Input
         isShown={props.isOpen}
         defaultValue={currentUser.about}
         onUpdate={handleValuesUpdate}
-        formPlace="popup"
+        validate={true}
+        place="popup"
         name="userAbout"
         type="text"
         placeholder="Описание"

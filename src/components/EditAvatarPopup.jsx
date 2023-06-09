@@ -1,7 +1,7 @@
 import {useRef, useState} from 'react';
 
 import PopupWithForm from './PopupWithForm';
-import InputWithValidation from './InputWithValidation';
+import Input from './Input';
 
 
 const EditAvatarPopup = props => {
@@ -21,17 +21,19 @@ const EditAvatarPopup = props => {
   
   return (
     <PopupWithForm
+      onSubmit={handleSubmit}
+      validate={true}
       title="Обновить аватар"
       name="edit-avatar"
       submitText="Сохранить"
-      onSubmit={handleSubmit}
       {...props}
     >
-      <InputWithValidation
+      <Input
         ref={avatarInputRef}
         isShown={props.isOpen}
         onUpdate={handleValueUpdate}
-        formPlace="popup"
+        validate={true}
+        place="popup"
         name="userAvatar"
         type="url"
         placeholder="Ссылка на изображение"
