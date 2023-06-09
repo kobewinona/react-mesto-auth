@@ -1,4 +1,4 @@
-.tooltip__message {
+.popup__message {
   max-width: 244px;
   
   color: #000;
@@ -13,7 +13,7 @@
 }
 
 @media (min-width: 768px) {
-  .tooltip__message {
+  .popup__message {
     max-width: 358px;
   }
 }

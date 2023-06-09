@@ -8,7 +8,7 @@ const AddPlacePopup = props => {
   const [inputValues, setInputValues] = useState({placeName: '', placeLink: ''});
   
   const handleValuesUpdate = (name, value) => {
-    setInputValues((prevValues) => ({
+    setInputValues(prevValues => ({
       ...prevValues, [name]: value
     }));
   };

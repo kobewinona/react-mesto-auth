@@ -14,7 +14,7 @@ const Form = forwardRef((props, ref) => {
         ? <Spinner theme={props.theme} size={props.size}/>
         : <button
             ref={ref}
-            className="popup__form-submit"
+            className={`${props.formPlace}__form-submit`}
             type="submit"
             name="submit"
             autoFocus

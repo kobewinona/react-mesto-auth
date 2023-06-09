@@ -212,26 +212,6 @@ const App = () => {
   };
   
   
-  // handle close all popups and info tooltip with esc
-  
-  useEffect(() => {
-    const handleKeyDown = event => {
-      if (event.key === 'Escape') {
-        closeAllPopups();
-        closeInfoToolTip();
-      }
-    };
-  
-    if (Object.values(isPopupOpen).some(p => p === true || isInfoToolTipOpen === true)) {
-      document.addEventListener('keydown', handleKeyDown);
-    }
-    
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  
-    // eslint-disable-next-line
-  }, [isPopupOpen, isInfoToolTipOpen]);
-  
-  
   // handle cards
   
   const handleCardClick = card => {

@@ -1,4 +1,4 @@
-.tooltip__pict {
+.popup__pict {
   width: 120px;
   height: 120px;
   
@@ -8,7 +8,7 @@
 }
 
 @media (min-width: 768px) {
-  .tooltip__pict {
+  .popup__pict {
     margin: 0 auto 32px auto;
   }
 }

@@ -72,14 +72,6 @@
 @import url('blocks/footer/footer.css');
 @import url('blocks/footer/__copyright/footer__copyright.css');
 
-@import url('blocks/tooltip/tooltip.css');
-@import url('blocks/tooltip/_opened/tooltip_opened.css');
-@import url('blocks/tooltip/__container/tooltip__container.css');
-@import url('blocks/tooltip/__pict/tooltip__pict.css');
-@import url('blocks/tooltip/__pict/_type/tooltip__pict_type_accept.css');
-@import url('blocks/tooltip/__pict/_type/tooltip__pict_type_reject.css');
-@import url('blocks/tooltip/__message/tooltip__message.css');
-
 @import url('blocks/popup/popup.css');
 @import url('blocks/popup/_opened/popup_opened.css');
 @import url('blocks/popup/_base/popup_base_light.css');
@@ -93,7 +85,12 @@
 @import url('blocks/popup/__form-submit/_disabled/popup__form-submit_disabled.css');
 @import url('blocks/popup/__container/_type/popup__container_type_form.css');
 @import url('blocks/popup/__container/_type/popup__container_type_preview.css');
+@import url('blocks/popup/__container/_type/popup__container_type_tooltip.css');
 @import url('blocks/popup/__title/popup__title.css');
 @import url('blocks/popup/__preview-element/popup__preview-element.css');
 @import url('blocks/popup/__preview-photo/popup__preview-photo.css');
 @import url('blocks/popup/__preview-cap/popup__preview-cap.css');
+@import url('blocks/popup/__pict/popup__pict.css');
+@import url('blocks/popup/__pict/_type/popup__pict_type_accept.css');
+@import url('blocks/popup/__pict/_type/popup__pict_type_reject.css');
+@import url('blocks/popup/__message/popup__message.css');

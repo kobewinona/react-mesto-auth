@@ -1,4 +1,4 @@
-.tooltip__container {
+.popup__container_type_tooltip {
   width: calc(100% - (19px * 2));
   max-width: 345px;
   
@@ -12,14 +12,14 @@
 }
 
 @media (min-width: 425px) {
-  .tooltip__container {
+  .popup__container_type_tooltip {
     width: calc(100% - (40px * 2));
     max-width: 430px;
   }
 }
 
 @media (min-width: 520px) {
-  .tooltip__container {
+  .popup__container_type_tooltip {
     padding: 60px 0;
   }
 }

@@ -1,5 +1,6 @@
 import {useRef} from 'react';
 
+import Popup from './Popup';
 import FormWithValidation from './FormWithValidation';
 import Form from './Form';
 
@@ -12,43 +13,29 @@ const PopupWithForm = props => {
   }
   
   return (
-    <section
-      className={`popup popup_base_light ${props.isOpen && 'popup_opened'}`}
-      onClick={props.onClose}
-    >
-      <div
-        className={`popup__container popup__container_type_form ${props.isOpen ? 'grow' : 'shrink'}`}
-        onClick={event => event.stopPropagation()}
-      >
-        <button
-          className="close-button"
-          type="button"
-          aria-label="Закрыть."
-          onClick={props.onClose}
-        />
-        <h2 className="popup__title">{props.title}</h2>
-        {props.validate
-          ? <FormWithValidation
-              onSubmit={props.onSubmit}
-              formPlace="popup"
-              theme="light"
-              size="small"
-              {...props}
-            >
-              {props.children}
-            </FormWithValidation>
-          : <Form
-              ref={submitButtonRef}
-              onSubmit={props.onSubmit}
-              formPlace="popup"
-              theme="light"
-              size="small"
-              {...props}>
-              {props.children}
-            </Form>
-        }
-      </div>
-    </section>
+    <Popup base="light" type="form" isOpen={props.isOpen} onClose={props.onClose}>
+      <h2 className="popup__title">{props.title}</h2>
+      {props.validate
+        ? <FormWithValidation
+            onSubmit={props.onSubmit}
+            formPlace="popup"
+            theme="light"
+            size="small"
+            {...props}
+          >
+          {props.children}
+        </FormWithValidation>
+        : <Form
+            ref={submitButtonRef}
+            onSubmit={props.onSubmit}
+            formPlace="popup"
+            theme="light"
+            size="small"
+            {...props}>
+            {props.children}
+          </Form>
+      }
+    </Popup>
   );
 };
 

@@ -1,23 +1,26 @@
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 
 import FormWithValidation from './FormWithValidation';
 
 
 const Login = props => {
-  const [inputValues, setInputValues] = useState({});
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
   
-  const handleValuesUpdate = event => {
-    setInputValues((prevValues) => ({
-      ...prevValues, [event.target.name]: event.target.value
-    }));
-  };
+  const handleEmailValueUpdate = event => {
+    setEmailValue(event.target.value);
+  }
   
-  const handleSubmit = useCallback(() => {
+  const handlePasswordValueUpdate = event => {
+    setPasswordValue(event.target.value);
+  }
+  
+  const handleSubmit = () => {
     props.onSignIn({
-      email: inputValues['userEmail'],
-      password: inputValues['userPassword']
+      email: emailValue,
+      password: passwordValue
     });
-  }, [props, inputValues]);
+  };
   
   return (
     <section className="auth">
@@ -32,7 +35,8 @@ const Login = props => {
         >
           <div className="auth__inputs-container">
             <input
-              onChange={handleValuesUpdate}
+              onChange={handleEmailValueUpdate}
+              value={emailValue}
               className="auth__form-input"
               name="userEmail"
               type="email"
@@ -41,7 +45,8 @@ const Login = props => {
               required
             />
             <input
-              onChange={handleValuesUpdate}
+              onChange={handlePasswordValueUpdate}
+              value={passwordValue}
               className="auth__form-input"
               name="userPassword"
               type="password"

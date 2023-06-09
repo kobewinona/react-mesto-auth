@@ -5,18 +5,21 @@ import FormWithValidation from './FormWithValidation';
 
 
 const Register = props => {
-  const [inputValues, setInputValues] = useState({});
-
-  const handleValuesUpdate = event => {
-    setInputValues((prevValues) => ({
-      ...prevValues, [event.target.name]: event.target.value
-    }));
-  };
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+  
+  const handleEmailValueUpdate = event => {
+    setEmailValue(event.target.value);
+  }
+  
+  const handlePasswordValueUpdate = event => {
+    setPasswordValue(event.target.value);
+  }
 
   const handleSubmit = () => {
     props.onSignUp({
-      email: inputValues['userEmail'],
-      password: inputValues['userPassword']
+      email: emailValue,
+      password: passwordValue
     });
   };
 
@@ -33,7 +36,8 @@ const Register = props => {
       >
         <div className="auth__inputs-container">
           <input
-            onChange={handleValuesUpdate}
+            onChange={handleEmailValueUpdate}
+            value={emailValue}
             className="auth__form-input"
             name="userEmail"
             type="email"
@@ -42,7 +46,8 @@ const Register = props => {
             required
           />
           <input
-            onChange={handleValuesUpdate}
+            onChange={handlePasswordValueUpdate}
+            value={passwordValue}
             className="auth__form-input"
             name="userPassword"
             type="password"

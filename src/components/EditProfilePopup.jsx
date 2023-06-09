@@ -12,7 +12,7 @@ const EditProfilePopup = props => {
   const [inputValues, setInputValues] = useState({});
   
   const handleValuesUpdate = (name, value) => {
-    setInputValues((prevValues) => ({
+    setInputValues(prevValues => ({
       ...prevValues, [name]: value
     }));
   };
@@ -26,7 +26,7 @@ const EditProfilePopup = props => {
       userName: currentUser.name,
       userAbout: currentUser.about
     })
-  }, [currentUser]);
+  }, [currentUser, props.isOpen]);
   
   
   return (

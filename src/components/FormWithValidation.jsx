@@ -51,10 +51,10 @@ const FormWithValidation = props => {
   
   return (
     <form
-      className={`${props.formPlace}__form`}
-      name={props.name}
       onChange={handleChange}
       onSubmit={handleSubmit}
+      className={`${props.formPlace}__form`}
+      name={props.name}
       noValidate
     >
       {props.children}
