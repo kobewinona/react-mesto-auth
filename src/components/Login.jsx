@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useCallback} from 'react';
 
 import FormWithValidation from './FormWithValidation';
 
@@ -12,12 +12,12 @@ const Login = props => {
     }));
   };
   
-  const handleSubmit = () => {
+  const handleSubmit = useCallback(() => {
     props.onSignIn({
       email: inputValues['userEmail'],
       password: inputValues['userPassword']
     });
-  };
+  }, [props, inputValues]);
   
   return (
     <section className="auth">

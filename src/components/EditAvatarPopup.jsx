@@ -4,7 +4,7 @@ import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-const EditAvatarPopup = memo(props => {
+const EditAvatarPopup = props => {
   const avatarInputRef = useRef();
   
   const [inputValue, setInputValue] = useState({});
@@ -40,6 +40,6 @@ const EditAvatarPopup = memo(props => {
       />
     </PopupWithForm>
   );
-});
+};
 
 export default EditAvatarPopup;

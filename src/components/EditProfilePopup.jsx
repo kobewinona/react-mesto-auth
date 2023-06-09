@@ -6,7 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-const EditProfilePopup = memo(props => {
+const EditProfilePopup = props => {
   const currentUser = useContext(CurrentUserContext);
   
   const [inputValues, setInputValues] = useState({});
@@ -65,6 +65,6 @@ const EditProfilePopup = memo(props => {
       />
     </PopupWithForm>
   );
-});
+};
 
 export default EditProfilePopup;

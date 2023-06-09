@@ -62,7 +62,7 @@ const App = () => {
   
   // handle registration and authorization
   
-  const handleSignUp = userInfo => {
+  const handleSignUp = useCallback(userInfo => {
     setIsLoading(true);
     setIsUpdating(true);
     
@@ -83,22 +83,17 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  };
+  }, []);
   
-  const handleSignIn = userInfo => {
+  const handleSignIn = useCallback(userInfo => {
     setIsLoading(true);
     setIsUpdating(true);
     
     auth.authorize(userInfo)
       .then(data => {
-        // setAuthInfo({...authInfo,
-        //   ['isLoggedIn']: true
-        // });
-        
         localStorage.setItem('jwt', data['token']);
-        // checkToken();
         
-        navigate('/', {replace: true});
+        checkToken();
       })
       .catch(err => {
         setIsAuthSuccessful(false);
@@ -110,19 +105,19 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  };
+  }, []);
   
   const checkToken = () => {
-    setIsUpdating(true);
-    
     const jwt = localStorage.getItem('jwt');
     
     if (jwt) {
+      setIsUpdating(true);
+      
       auth.getContent(jwt)
         .then(res => {
           setAuthInfo({...authInfo,
-            ['userEmail']: res.data.email,
-            ['isLoggedIn']: true
+            userEmail: res.data.email,
+            isLoggedIn: true
           });
           
           navigate('/', {replace: true});
@@ -131,28 +126,27 @@ const App = () => {
         .finally(() => setIsUpdating(false));
     } else {
       setAuthInfo({...authInfo,
-        ['userEmail']: '',
-        ['isLoggedIn']: false
+        userEmail: '',
+        isLoggedIn: false
       });
-      setIsUpdating(false);
     }
   };
   
   useEffect(() => {
-    // const jwt = localStorage.getItem('jwt');
-  
     checkToken();
+  
+    // eslint-disable-next-line
   }, []);
   
   
   // handle sign out
   
-  const handleSignOut = () => {
+  const handleSignOut = useCallback(() => {
     localStorage.removeItem('jwt');
     checkToken();
     
     navigate('/sign-in');
-  };
+  });
   
   
   // handle open tooltip
@@ -200,7 +194,7 @@ const App = () => {
   
   // handle close all popups
   
-  const closeAllPopups = useCallback(() => {
+  const closeAllPopups = () => {
     setIsPopupOpen({...isPopupOpen,
       editAvatarPopup: false,
       editProfilePopup: false,
@@ -210,7 +204,7 @@ const App = () => {
     });
     const cleanUp = () => setSelectedCard({});
     setTimeout(cleanUp, 200);
-  }, [isPopupOpen]);
+  };
   
   
   // handle close all popups and info tooltip with esc

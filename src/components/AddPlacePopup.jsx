@@ -4,7 +4,7 @@ import PopupWithForm from './PopupWithForm';
 import InputWithValidation from './InputWithValidation';
 
 
-const AddPlacePopup = memo(props => {
+const AddPlacePopup = props => {
   const [inputValues, setInputValues] = useState({placeName: '', placeLink: ''});
   
   const handleValuesUpdate = useCallback((name, value) => {
@@ -49,6 +49,6 @@ const AddPlacePopup = memo(props => {
       />
     </PopupWithForm>
   );
-});
+};
 
 export default AddPlacePopup;
