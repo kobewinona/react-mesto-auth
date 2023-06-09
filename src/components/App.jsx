@@ -34,9 +34,10 @@ const App = () => {
     editProfilePopup: false,
     addPlacePopup: false,
     deletePlacePopup: false,
-    cardPreviewPopup: false,
-    infoToolTip: false
+    cardPreviewPopup: false
   });
+  
+  const [isInfoToolTipOpen, setIsInfoToolTipOpen] = useState(false)
   
   const [isUpdating, setIsUpdating] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -82,7 +83,7 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  }
+  };
   
   const handleSignIn = userInfo => {
     setIsLoading(true);
@@ -90,13 +91,12 @@ const App = () => {
     
     auth.authorize(userInfo)
       .then(data => {
-        
-        setAuthInfo({...authInfo,
-          ['isLoggedIn']: true
-        });
+        // setAuthInfo({...authInfo,
+        //   ['isLoggedIn']: true
+        // });
         
         localStorage.setItem('jwt', data['token']);
-        handleAuth(data['token'])
+        // checkToken();
         
         navigate('/', {replace: true});
       })
@@ -110,10 +110,9 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  }
+  };
   
-  const handleAuth = () => {
-    setIsLoading(true);
+  const checkToken = () => {
     setIsUpdating(true);
     
     const jwt = localStorage.getItem('jwt');
@@ -129,24 +128,20 @@ const App = () => {
           navigate('/', {replace: true});
         })
         .catch(err => console.log(err))
-        .finally(() => {
-          setIsLoading(false);
-          setIsUpdating(false);
-        });
+        .finally(() => setIsUpdating(false));
     } else {
       setAuthInfo({...authInfo,
         ['userEmail']: '',
         ['isLoggedIn']: false
       });
-      setIsLoading(false);
       setIsUpdating(false);
     }
-  }
+  };
   
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    
-    handleAuth(jwt);
+    // const jwt = localStorage.getItem('jwt');
+  
+    checkToken();
   }, []);
   
   
@@ -154,19 +149,27 @@ const App = () => {
   
   const handleSignOut = () => {
     localStorage.removeItem('jwt');
-    handleAuth();
+    checkToken();
     
     navigate('/sign-in');
-  }
+  };
+  
+  
+  // handle open tooltip
+  
+  const handleInfoToolTip = useCallback(() => {
+    setIsInfoToolTipOpen(true);
+  }, []);
+  
+  
+  // handle close info tooltip
+  
+  const closeInfoToolTip = () => {
+    setIsInfoToolTipOpen(false);
+  };
   
   
   // handle open popup
-  
-  const handleInfoToolTip = useCallback(() => {
-    setIsPopupOpen({...isPopupOpen,
-      infoToolTip: true
-    });
-  }, [isPopupOpen])
   
   const handleEditAvatarClick = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
@@ -195,7 +198,7 @@ const App = () => {
   }, [isPopupOpen]);
   
   
-  // handle close popup
+  // handle close all popups
   
   const closeAllPopups = useCallback(() => {
     setIsPopupOpen({...isPopupOpen,
@@ -203,28 +206,31 @@ const App = () => {
       editProfilePopup: false,
       addPlacePopup: false,
       deletePlacePopup: false,
-      cardPreviewPopup: false,
-      infoToolTip: false
+      cardPreviewPopup: false
     });
     const cleanUp = () => setSelectedCard({});
     setTimeout(cleanUp, 200);
   }, [isPopupOpen]);
   
+  
+  // handle close all popups and info tooltip with esc
+  
   useEffect(() => {
     const handleKeyDown = event => {
       if (event.key === 'Escape') {
         closeAllPopups();
+        closeInfoToolTip();
       }
     };
   
-    if (Object.values(isPopupOpen).some(p => p === true)) {
+    if (Object.values(isPopupOpen).some(p => p === true || isInfoToolTipOpen === true)) {
       document.addEventListener('keydown', handleKeyDown);
     }
     
     return () => document.removeEventListener('keydown', handleKeyDown);
   
     // eslint-disable-next-line
-  }, [isPopupOpen]);
+  }, [isPopupOpen, isInfoToolTipOpen]);
   
   
   // handle cards
@@ -353,9 +359,9 @@ const App = () => {
         onClose={closeAllPopups}
       />
       <InfoTooltip
-        isOpen={isPopupOpen.infoToolTip}
+        isOpen={isInfoToolTipOpen}
         isAuthSuccessful={isAuthSuccessful}
-        onClose={closeAllPopups}/>
+        onClose={closeInfoToolTip}/>
     </AuthContext.Provider>
   );
 };

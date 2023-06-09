@@ -61,11 +61,11 @@ const FormWithValidation = memo(props => {
       {props.isUpdating
         ? <Spinner theme={props.theme} size={props.size}/>
         : <button
-          className={`${props.formPlace}__form-submit ${!isFormValid && `${props.formPlace}__form-submit_disabled`}`}
-          type="submit"
-          name="submit"
-          disabled={!isFormValid}
-        >{props.submitText || 'Сохранить'}</button>}
+            className={`${props.formPlace}__form-submit ${!isFormValid && `${props.formPlace}__form-submit_disabled`}`}
+            type="submit"
+            name="submit"
+            disabled={!isFormValid}
+          >{props.submitText || 'Сохранить'}</button>}
     </form>
   )
 });

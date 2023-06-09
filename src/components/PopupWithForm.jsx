@@ -1,7 +1,7 @@
 import {memo, useRef} from 'react';
 
 import FormWithValidation from './FormWithValidation';
-import Spinner from './Spinner';
+import Form from './Form';
 
 
 const PopupWithForm = memo(props => {
@@ -9,43 +9,6 @@ const PopupWithForm = memo(props => {
 
   if (!props.validate && props.isOpen) {
     setTimeout(() => submitButtonRef.current?.focus(), 50);
-  }
-  
-  //TODO fix this
-  
-  const renderFormWithValidation = () => {
-    return (
-      <FormWithValidation
-        onSubmit={props.onSubmit}
-        formPlace="popup"
-        theme="light"
-        size="small"
-        {...props}
-      >
-        {props.children}
-      </FormWithValidation>
-    )
-  }
-  
-  const renderForm = () => {
-    return (
-      <form
-        className="form"
-        name={props.name}
-        onSubmit={props.onSubmit}
-        noValidate
-      >
-        {props.isUpdating
-          ? <Spinner theme="light" size="small"/>
-          : <button
-            ref={submitButtonRef}
-            className="popup__form-submit"
-            type="submit"
-            name="submit"
-            autoFocus
-          >{props.submitText || 'Сохранить'}</button>}
-      </form>
-    )
   }
   
   return (
@@ -58,7 +21,26 @@ const PopupWithForm = memo(props => {
           className="close-button" type="button" aria-label="Закрыть." onClick={props.onClose}
         />
         <h2 className="popup__title">{props.title}</h2>
-        {props.validate ? renderFormWithValidation() : renderForm()}
+        {props.validate
+          ? <FormWithValidation
+              onSubmit={props.onSubmit}
+              formPlace="popup"
+              theme="light"
+              size="small"
+              {...props}
+            >
+              {props.children}
+            </FormWithValidation>
+          : <Form
+              ref={submitButtonRef}
+              onSubmit={props.onSubmit}
+              formPlace="popup"
+              theme="light"
+              size="small"
+              {...props}>
+              {props.children}
+            </Form>
+        }
       </div>
     </section>
   );

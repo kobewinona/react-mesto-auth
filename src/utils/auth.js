@@ -24,7 +24,7 @@ export const register = ({email, password}) => {
     headers: authConfig['headers'],
     body: JSON.stringify({email, password})
   }).then(res => returnRes(res))
-}
+};
 
 export const authorize = ({email, password}) => {
   return setRequest(`${authConfig['url']}/signin`, {
@@ -32,11 +32,11 @@ export const authorize = ({email, password}) => {
     headers: authConfig['headers'],
     body: JSON.stringify({email, password})
   }).then(res => returnRes(res));
-}
+};
 
 export const getContent = token => {
   return setRequest(`${authConfig['url']}/users/me`, {
     method: 'GET',
     headers: {...authConfig['headers'], 'Authorization': `Bearer ${token}`}
   }).then(res => returnRes(res));
-}
+};

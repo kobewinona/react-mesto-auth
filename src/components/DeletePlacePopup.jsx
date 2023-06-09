@@ -4,7 +4,6 @@ import PopupWithForm from './PopupWithForm';
 
 
 const DeletePlacePopup = memo(props => {
-  console.log(props);
   const handleSubmit = useCallback(event => {
     event.preventDefault();
     
@@ -13,10 +12,10 @@ const DeletePlacePopup = memo(props => {
   
   return(
     <PopupWithForm
+      onSubmit={handleSubmit}
       title="Уверены?"
       name="delete-place"
       submitText="Да"
-      onSubmit={handleSubmit}
       {...props}
     />
   );

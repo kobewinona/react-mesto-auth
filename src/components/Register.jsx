@@ -24,8 +24,8 @@ const Register = props => {
     <section className="auth">
       <h2 className="auth__title">Регистрация</h2>
       <FormWithValidation
-        submitText="Зарегистрироваться"
         onSubmit={handleSubmit}
+        submitText="Зарегистрироваться"
         formPlace="auth"
         theme="dark"
         size="small"
@@ -33,8 +33,8 @@ const Register = props => {
       >
         <div className="auth__inputs-container">
           <input
-            className="auth__form-input"
             onChange={handleValuesUpdate}
+            className="auth__form-input"
             name="userEmail"
             type="email"
             placeholder="Email"
@@ -42,8 +42,8 @@ const Register = props => {
             required
           />
           <input
-            className="auth__form-input"
             onChange={handleValuesUpdate}
+            className="auth__form-input"
             name="userPassword"
             type="password"
             placeholder="Пароль"

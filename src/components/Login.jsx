@@ -22,10 +22,9 @@ const Login = props => {
   return (
     <section className="auth">
       <h2 className="auth__title">Вход</h2>
-      
         <FormWithValidation
-          submitText="Войти"
           onSubmit={handleSubmit}
+          submitText="Войти"
           formPlace="auth"
           theme="dark"
           size="small"
@@ -33,8 +32,8 @@ const Login = props => {
         >
           <div className="auth__inputs-container">
             <input
-              className="auth__form-input"
               onChange={handleValuesUpdate}
+              className="auth__form-input"
               name="userEmail"
               type="email"
               placeholder="Email"
@@ -42,8 +41,8 @@ const Login = props => {
               required
             />
             <input
-              className="auth__form-input"
               onChange={handleValuesUpdate}
+              className="auth__form-input"
               name="userPassword"
               type="password"
               placeholder="Пароль"
