@@ -1,4 +1,4 @@
-import {memo, useCallback, useState, useEffect, useContext} from 'react';
+import {useState, useEffect, useContext} from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
@@ -11,15 +11,15 @@ const EditProfilePopup = props => {
   
   const [inputValues, setInputValues] = useState({});
   
-  const handleValuesUpdate = useCallback((name, value) => {
+  const handleValuesUpdate = (name, value) => {
     setInputValues((prevValues) => ({
       ...prevValues, [name]: value
     }));
-  }, []);
+  };
   
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = () => {
     props.onUpdateUser(inputValues);
-  }, [props, inputValues]);
+  };
   
   useEffect(() => {
     setInputValues({

@@ -1,11 +1,11 @@
-import {memo, useState, useContext} from 'react';
+import {useState, useContext} from 'react';
 
 import {CurrentUserContext} from '../contexts/CurrentUserContext';
 
 import Card from './Card';
 
 
-const Main = memo(props => {
+const Main = props => {
   const currentUser = useContext(CurrentUserContext);
   
   const [isAvatarLoaded, setIsAvatarLoaded] = useState(false);
@@ -23,7 +23,7 @@ const Main = memo(props => {
             src={currentUser.avatar} alt="Аватар." onLoad={handleAvatarLoad}/>
           <button
             className="profile__edit-avatar-button"
-            onClick={props.onEditAvatar}>
+            onClick={props.onEditAvatarClick}>
           </button>
         </div>
         <div className="profile__container">
@@ -32,7 +32,7 @@ const Main = memo(props => {
             className="profile__edit-profile-button"
             type="button"
             aria-label="Редактировать профиль."
-            onClick={props.onEditProfile}>
+            onClick={props.onEditProfileClick}>
           </button>
           <p className="profile__about">{currentUser.about}</p>
         </div>
@@ -40,14 +40,14 @@ const Main = memo(props => {
           className="profile__add-place-button"
           type="button"
           aria-label="Добавить фотографию места."
-          onClick={props.onAddPlace}>
+          onClick={props.onAddPlaceClick}>
         </button>
       </section>
       <section className="places" aria-label="Секция с фотографиями мест России.">
         <ul className="places__list">
           {props.cards.map(card => {
             return <Card
-              key={card._id}
+              key={card['_id']}
               card={card}
               onCardClick={() => props.onCardClick(card)}
               onCardLikeClick={() => props.onCardLikeClick(card)}
@@ -58,6 +58,6 @@ const Main = memo(props => {
       </section>
     </main>
   );
-});
+};
 
 export default Main;

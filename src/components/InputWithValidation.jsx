@@ -1,7 +1,7 @@
 import {forwardRef, useState, useEffect} from 'react';
 
 
-const InputWithValidation = forwardRef(({name, onUpdate, isShown, formPlace, ...props}, ref) => {
+const InputWithValidation = forwardRef(({onUpdate, isShown, formPlace, ...props}, ref) => {
   const [inputValue, setInputValue] = useState('');
   const [isInputValid, setIsInputValid] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -17,7 +17,7 @@ const InputWithValidation = forwardRef(({name, onUpdate, isShown, formPlace, ...
     setIsInputValid(event.target.validity.valid);
     setErrorMessage(event.target.validationMessage);
     
-    onUpdate(name, event.target.value);
+    onUpdate(props.name, event.target.value);
   }
   
   return (
@@ -25,7 +25,6 @@ const InputWithValidation = forwardRef(({name, onUpdate, isShown, formPlace, ...
       <input
         ref={ref}
         className={`${formPlace}__form-input ${!isInputValid && `${formPlace}__form-input_invalid`}`}
-        name={name}
         onChange={handleInputsChange}
         value={inputValue || ''}
         {...props}

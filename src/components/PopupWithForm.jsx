@@ -1,10 +1,10 @@
-import {memo, useRef} from 'react';
+import {useRef} from 'react';
 
 import FormWithValidation from './FormWithValidation';
 import Form from './Form';
 
 
-const PopupWithForm = memo(props => {
+const PopupWithForm = props => {
   const submitButtonRef = useRef();
 
   if (!props.validate && props.isOpen) {
@@ -12,13 +12,19 @@ const PopupWithForm = memo(props => {
   }
   
   return (
-    <section className={`popup popup_base_light ${props.isOpen && 'popup_opened'}`} onClick={props.onClose}>
+    <section
+      className={`popup popup_base_light ${props.isOpen && 'popup_opened'}`}
+      onClick={props.onClose}
+    >
       <div
         className={`popup__container popup__container_type_form ${props.isOpen ? 'grow' : 'shrink'}`}
         onClick={event => event.stopPropagation()}
       >
         <button
-          className="close-button" type="button" aria-label="Закрыть." onClick={props.onClose}
+          className="close-button"
+          type="button"
+          aria-label="Закрыть."
+          onClick={props.onClose}
         />
         <h2 className="popup__title">{props.title}</h2>
         {props.validate
@@ -44,6 +50,6 @@ const PopupWithForm = memo(props => {
       </div>
     </section>
   );
-});
+};
 
 export default PopupWithForm;

@@ -1,4 +1,4 @@
-import {useCallback, useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom';
 
 import * as api from '../utils/api';
@@ -62,7 +62,7 @@ const App = () => {
   
   // handle registration and authorization
   
-  const handleSignUp = useCallback(userInfo => {
+  const handleSignUp = userInfo => {
     setIsLoading(true);
     setIsUpdating(true);
     
@@ -83,9 +83,11 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  }, []);
   
-  const handleSignIn = useCallback(userInfo => {
+    // eslint-disable-next-line
+  };
+  
+  const handleSignIn = userInfo => {
     setIsLoading(true);
     setIsUpdating(true);
     
@@ -105,7 +107,9 @@ const App = () => {
         setIsLoading(false);
         setIsUpdating(false);
       });
-  }, []);
+  
+    // eslint-disable-next-line
+  };
   
   const checkToken = () => {
     const jwt = localStorage.getItem('jwt');
@@ -141,19 +145,19 @@ const App = () => {
   
   // handle sign out
   
-  const handleSignOut = useCallback(() => {
+  const handleSignOut = () => {
     localStorage.removeItem('jwt');
     checkToken();
     
     navigate('/sign-in');
-  });
+  };
   
   
   // handle open tooltip
   
-  const handleInfoToolTip = useCallback(() => {
+  const handleInfoToolTip = () => {
     setIsInfoToolTipOpen(true);
-  }, []);
+  };
   
   
   // handle close info tooltip
@@ -165,31 +169,31 @@ const App = () => {
   
   // handle open popup
   
-  const handleEditAvatarClick = useCallback(() => {
+  const handleEditAvatarClick = () => {
     setIsPopupOpen({...isPopupOpen,
       editAvatarPopup: true
     });
-  }, [isPopupOpen]);
+  };
   
-  const handleEditProfileClick = useCallback(() => {
+  const handleEditProfileClick = () => {
     setIsPopupOpen({...isPopupOpen,
       editProfilePopup: true
     });
-  }, [isPopupOpen]);
+  };
   
-  const handleAddPlaceClick = useCallback(() => {
+  const handleAddPlaceClick = () => {
     setIsPopupOpen({...isPopupOpen,
       addPlacePopup: true
     });
-  }, [isPopupOpen]);
+  };
   
-  const handleDeletePlaceClick = useCallback(card => {
+  const handleDeletePlaceClick = card => {
     setCardToDelete(card);
     
     setIsPopupOpen({...isPopupOpen,
       deletePlacePopup: true
     });
-  }, [isPopupOpen]);
+  };
   
   
   // handle close all popups
@@ -202,6 +206,7 @@ const App = () => {
       deletePlacePopup: false,
       cardPreviewPopup: false
     });
+    
     const cleanUp = () => setSelectedCard({});
     setTimeout(cleanUp, 200);
   };
@@ -229,22 +234,21 @@ const App = () => {
   
   // handle cards
   
-  const handleCardClick = useCallback(card => {
+  const handleCardClick = card => {
     setIsPopupOpen({...isPopupOpen,
       cardPreviewPopup: true
     });
     
     setSelectedCard(card);
-  }, [isPopupOpen]);
+  };
   
-  // noinspection com.haulmont.rcb.ExhaustiveDepsInspection
-  const handleCardLikeClick = useCallback(card => {
+  const handleCardLikeClick = card => {
     const isLiked = card['likes'].some(like => like['_id'] === currentUser['_id']);
   
     api.changeLikeCardStatus(card['_id'], isLiked)
       .then(newCard => setCards(cards.map(c => c['_id'] === card['_id'] ? newCard : c)))
       .catch(err => console.log(err));
-  }, [cards, currentUser]);
+  };
   
   
   // handle forms
@@ -303,9 +307,9 @@ const App = () => {
                 cards={cards}
                 isLoading={isLoading}
                 isUpdating={isUpdating}
-                onEditAvatar={handleEditAvatarClick}
-                onEditProfile={handleEditProfileClick}
-                onAddPlace={handleAddPlaceClick}
+                onEditAvatarClick={handleEditAvatarClick}
+                onEditProfileClick={handleEditProfileClick}
+                onAddPlaceClick={handleAddPlaceClick}
                 onCardClick={handleCardClick}
                 onCardLikeClick={handleCardLikeClick}
                 onCardDeleteClick={handleDeletePlaceClick}
