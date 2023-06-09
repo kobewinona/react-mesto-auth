@@ -50,7 +50,6 @@
 
 @import url('blocks/auth/auth.css');
 @import url('blocks/auth/__title/auth__title.css');
-@import url('blocks/auth/__form-input/auth__form-input.css');
 @import url('blocks/auth/__text/auth__text.css');
 @import url('blocks/auth/__link/auth__link.css');
 
@@ -87,9 +86,6 @@
 @import url('blocks/popup/_base/popup_base_light.css');
 @import url('blocks/popup/_base/popup_base_dark.css');
 @import url('blocks/popup/__container/popup__container.css');
-@import url('blocks/popup/__form-input/popup__form-input.css');
-@import url('blocks/popup/__form-input/_invalid/popup__form-input_invalid.css');
-@import url('blocks/popup/__form-error-message/popup__form-error-message.css');
 @import url('blocks/popup/__container/_type/popup__container_type_form.css');
 @import url('blocks/popup/__container/_type/popup__container_type_preview.css');
 @import url('blocks/popup/__container/_type/popup__container_type_tooltip.css');
