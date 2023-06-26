@@ -17,7 +17,7 @@ const Header = props => {
   
   useEffect(() => {
     setIsAccountMenuShown(false);
-  }, [props.isHigherResOn]);
+  }, [props.isMobile]);
   
   return (
     <header className="header">
@@ -38,15 +38,14 @@ const Header = props => {
         {pathname === '/sign-up' && <Link className="header__link" to="/sign-in" replace={true}>Войти</Link>}
         {pathname === '/sign-in' && <Link className="header__link" to="/sign-up" replace={true}>Регистрация</Link>}
         {isLoggedIn
-          ? props.isHigherResOn
-            ? <div className="header__account-container">
+          && props.isMobile
+            ? <div className="burger" onClick={toggleAccountMenu}>
+                <div className={`burger__icon ${isAccountMenuShown && 'burger__icon_turned-into-cross'}`}></div>
+              </div>
+            : <div className="header__account-container">
                 <p className="header__account-user-info">{userEmail}</p>
                 <button className="header__account-button" onClick={props.onSignOut}>Выйти</button>
               </div>
-            : <div className="burger" onClick={toggleAccountMenu}>
-                <div className={`burger__icon ${isAccountMenuShown && 'burger__icon_turned-into-cross'}`}></div>
-              </div>
-          : null
         }
       </div>
     </header>

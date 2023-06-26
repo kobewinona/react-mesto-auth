@@ -120,8 +120,8 @@ const App = () => {
       auth.getContent(jwt)
         .then(res => {
           setAuthInfo({...authInfo,
-            userEmail: res.data.email,
-            isLoggedIn: true
+            isLoggedIn: true,
+            userEmail: res.data.email
           });
           
           navigate('/', {replace: true});
@@ -130,8 +130,8 @@ const App = () => {
         .finally(() => setIsUpdating(false));
     } else {
       setAuthInfo({...authInfo,
-        userEmail: '',
-        isLoggedIn: false
+        isLoggedIn: false,
+        userEmail: ''
       });
     }
   };

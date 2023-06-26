@@ -3,18 +3,18 @@ import {useState, useEffect} from 'react';
 
 const WithSetRes = ({element: Component, ...props}) => {
   const higherRes = 768;
-  const [isHigherResOn, setIsHigherResOn] = useState();
+  const [isMobile, setIsMobile] = useState();
   
   const handleResize = () => {
-    if(window.innerWidth >= higherRes) {
-      setIsHigherResOn(true);
+    if (window.innerWidth <= higherRes) {
+      setIsMobile(true);
     } else {
-      setIsHigherResOn(false);
+      setIsMobile(false);
     }
   }
   
   useEffect(() => {
-    setIsHigherResOn(window.innerWidth >= higherRes);
+    setIsMobile(window.innerWidth <= higherRes);
     
     window.addEventListener('resize', handleResize);
     return () => {
@@ -22,7 +22,7 @@ const WithSetRes = ({element: Component, ...props}) => {
     };
   }, []);
   
-  return (<Component isHigherResOn={isHigherResOn} {...props}/>);
+  return (<Component isMobile={isMobile} {...props}/>);
 };
 
 export default WithSetRes;

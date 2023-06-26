@@ -34,7 +34,7 @@ Please feel free to register with any fake email and password, for example you c
 
 This is my project using`React` with authorization and registration. In this project I’m learning about `JWT`, `localStorage` and `protected routes`.
 
-The website is all about showcasing different places in Russia, and it allows you to personalize your profile by changing your name and job, uploading new pictures of interesting locations, and even giving them a little❤️.
+The website is all about showcasing different places in Russia, and it allows you to personalize your profile by changing your name and job, uploading new pictures of interesting locations, and even giving them a little ❤️.
 
 ## what I learned doing this project
 
